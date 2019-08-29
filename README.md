@@ -4,7 +4,7 @@ Linux server configuration project of the [Udacity Full Stack Web Developer Nano
 ## Get your server
 Go to https://lightsail.aws.amazon.com and log in.<br>
 Click on *Create Instance*:<br>
-<kbd><img src="readme_images/create-instance.png" width=550></kbd>
+<kbd><img src="readme_images/create-instance.PNG" width=550></kbd>
 <br>Choose the following configurations for your instance:
 
 * Select your instance location according to your own location.
@@ -23,9 +23,9 @@ Click *Create instance*.<br>
 You will be redirected to the *Instances* tab.<br>
 Your new instance is in the progress of being activated. Wait for the activation process to finish. You can see, if the activation process has already finished by looking at the visualization of your new instance:<br>
 **Before:**<br>
-<kbd><img src="readme_images/instance-activation-pending.png" width=550></kbd>
+<kbd><img src="readme_images/instance-activation-pending.PNG" width=550></kbd>
 <br>**After:**<br>
-<kbd><img src="readme_images/instance-running.png" width=550></kbd>
+<kbd><img src="readme_images/instance-running.PNG" width=550></kbd>
 
 ## Access your server via SSH
 Use PuTTY or the tool of your choice to connect to your instance. Instructions on how to do this are provided by Amazon.<br>
@@ -33,6 +33,6 @@ To view the instructions:
 
 * Click on your instance to go to the instance's site.
 * Make sure you are on the *Connect* tab:<br>
-<kbd><img src="readme_images/instance-site.png" width=550></kbd>
+<kbd><img src="readme_images/instance-site.PNG" width=550></kbd>
 * Click that little *(?)* next to *Connect using your own SSH client*.
 
