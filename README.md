@@ -332,54 +332,15 @@ My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCat
         ```
 
 Prepare virtual environment tools:
-USING PIPENV
 
 * Install pip:
     ```bash
     sudo apt-get install python3-pip
     ```
-* Use pip with the --user option to do a user installation of Pipenv:
+* Install virtualenv for Python:
     ```bash
-    pip install --user pipenv
+    sudo apt-get install python-virtualenv
     ```
-* Make sure that the user base binary directory is added to your PATH to make pipenv available to the shell:
-
-    * Determine the location of your user base binary directory:
-        ```bash
-        python3 -m site --user-base
-        ```
-        Usually that will be */home/grader/.local*.
-    * Check, if this path is already added to PATH:
-        ```bash
-        echo $PATH
-        ```
-        If it is already added, you can skip the following steps.
-    * Edit *~/.profile* (e.g. by using *vim*):
-        ```bash
-        sudo vim ~/.profile
-        ```
-    * Add the following lines to *~/.profile*:
-        ```bash
-        # add Python USER_BASE to PATH variable
-        export PATH="$PATH:/home/grader/.local/bin"
-        ```
-    * Put your changes into effect:
-        ```bash
-        source ~/.profile
-        ```
-
-USING VIRTUALENV
-sudo apt-get install python-virtualenv
-cd /var/www/item_catalog/item_catalog
-sudo virtualenv -p python3.7 venv
--> root directory of the virtual environment: /var/www/item_catalog/item_catalog/venv
-source venv/bin/activate
-check:
-python --version
-pip --version
-pip list
-sudo ./venv/bin/python -m pip install "Flask==1.1.1"
-
 
 Finally, install git:
 ```bash
