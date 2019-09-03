@@ -369,36 +369,45 @@ Clone and setup your Python Flask project from a Github repository you created e
 
 Set up a virtual environment for your project to run in:
 
-* Since Pipenv manages dependencies on a per-project basis, it is important to install all dependencies from within the Python project folder! To make sure that pipenv has access to the project folder, change the permissions for the corresponding subdirectory of your project's directory:
+* Change into you project's directory:
     ```bash
-    sudo chmod 777 /var/www/item_catalog/item_catalog/app
+    cd /var/www/item_catalog/item_catalog
     ```
-* Then change into the directory:
+* Create a virtual environment for your project:
     ```bash
-    cd /var/www/item_catalog/item_catalog/app
+    sudo virtualenv -p python3.7 venv
     ```
-* Create a Pipfile to manage your project's dependencies (choose the python version your application needs):
+    Take note of the exact path of the root directory of the virtual environment: */var/www/item_catalog/item_catalog/venv*
+* Activate the virtual environment:
     ```bash
-    pipenv install --python 3.7
+    source venv/bin/activate
     ```
-* Install all packages your project depends upon, using *pipenv*. In case of my *Item Catalog* project:
+* Check if the Python version and the Python version for pip is the right one (as per your application's requirements):
     ```bash
-    pipenv install "httplib2==0.13.1"
-    pipenv install "Flask==1.1.1"
-    pipenv install "oauth2client==4.1.3"
-    pipenv install "requests==2.22.0"
-    pipenv install "SQLAlchemy==1.3.6"
-    pipenv install "bleach==3.1.0"
+    python --version
+    pip --version
     ```
-* Set the *--deploy* flag:
+* Install all packages your project depends on, using pip and the python binary of your project's virtual environment. In case of my *Item Catalog* project:
     ```bash
-    pipenv install --deploy
+    sudo ./venv/bin/python -m pip install "httplib2==0.13.1"
+    sudo ./venv/bin/python -m pip install "Flask==1.1.1"
+    sudo ./venv/bin/python -m pip install "oauth2client==4.1.3"
+    sudo ./venv/bin/python -m pip install "requests==2.22.0"
+    sudo ./venv/bin/python -m pip install "SQLAlchemy==1.3.6"
+    sudo ./venv/bin/python -m pip install "bleach==3.1.0"
     ```
-
-Check, if your application is runnable:
-```bash
-pipenv run python3.7 application.py
-```
+* Check, if all packages were installed within the virtual environment:
+    ```bash
+    pip list
+    ```
+* Check, if your application is runnable (virtual environment must be activated):
+    ```bash
+    python application.py
+    ```
+* Deactivate the virtual environment again:
+    ```bash
+    deactivate
+    ```
 
 Add an *\_\_init\_\_.py* to your project:
 
