@@ -421,17 +421,11 @@ Add an *\_\_init\_\_.py* to your project:
     ```
 * Add an import of the Flask application object (in my project the object is called *app*):
     ```python
-    from application import app
+    from .application import app
     ```
 
 Create the .wsgi file:
 
-* Determine the path the virtual environment is located in:
-    ```bash
-    cd /var/www/item_catalog/item_catalog/app
-    pipenv --venv
-    ```
-    Copy the path for later.
 * Create a .wsgi file in the outer directory of your project folder:
     ```bash
     sudo touch /var/www/item_catalog/item_catalog.wsgi
@@ -440,9 +434,8 @@ Create the .wsgi file:
     ```bash
     sudo vim /var/www/item_catalog/item_catalog.wsgi
     ```
-* Add the following lines, using the path you copied earlier:
+* Add the following lines, using the path where your application directory is located:
     ```bash
-    #!PATH_TO_YOUR_VENV_HERE/bin python3.7
     import sys
     import logging
     logging.basicConfig(stream=sys.stderr)
@@ -452,6 +445,8 @@ Create the .wsgi file:
 
 Set up a virtual host for your project:
 
+* Look up the exact path of the root directory of the virtual environment that you took note of earlier (*/var/www/item_catalog/item_catalog/venv* in my example).<br>
+    Copy the path for later.
 * Create an Apache site configuration file:
     ```bash
     sudo touch /etc/apache2/sites-available/item_catalog.conf
@@ -460,24 +455,29 @@ Set up a virtual host for your project:
     ```bash
     sudo vim /etc/apache2/sites-available/item_catalog.conf
     ```
-* Add the following lines, using your instance's public IP address:
+* Add the following lines, using your instance's public IP address and the path of the root directory of the virtual environment you copied earlier:
     ```
     <VirtualHost *:80>
         ServerName YOUR_INSTANCES_IP_ADDRESS_HERE
         ServerAlias YOUR_REMOTE_NAME_SERVER_HERE (optional)
         ServerAdmin ubuntu@YOUR_INSTANCES_IP_ADDRESS_HERE
-        WSGIDaemonProcess item_catalog python-path=/var/www/item_catalog:/var/www/item_catalog/item_catalog:PATH_TO_YOUR_VENV_HERE/lib/python3.7/site-packages
+
+        WSGIDaemonProcess item_catalog python-home=YOUR_PATH_TO_VENV_ROOT_DIRECTORY_HERE
         WSGIProcessGroup item_catalog
-        WSGIScriptAlias / /var/www/item_catalog/item_catalog.wsgi
-        <Directory /var/www/item_catalog/item_catalog/app/>
+        WSGIApplicationGroup %{GLOBAL}
+
+        WSGIScriptAlias /item_catalog /var/www/item_catalog/item_catalog.wsgi
+
+        <Directory /var/www/item_catalog>
+        <IfVersion < 2.4>
             Order allow,deny
             Allow from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
         </Directory>
-        Alias /static /var/www/item_catalog/item_catalog/app/static
-        <Directory /var/www/item_catalog/item_catalog/app/static/>
-            Order allow,deny
-            Allow from all
-        </Directory>
+        
         ErrorLog ${APACHE_LOG_DIR}/error.log
         LogLevel warn
         CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -514,5 +514,5 @@ Set up a virtual host for your project:
 * Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS"
 * Many thanks to [Kenneth Reitz](https://www.kennethreitz.org) who authored an [Ubuntu manpage](http://manpages.ubuntu.com/manpages/eoan/man1/pipenv.1.html) about using [pipenv](https://github.com/pypa/pipenv) to manage Python packages when deploying network services
 * Many thanks to [Website for Students](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04
-* Many thanks to Graham Dumpleton, who authored an [user guide](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) on how to use Python virtual environments with mod_wsgi
+* Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html)
 * Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with `mod_wsgi` on Ubuntu 16*
