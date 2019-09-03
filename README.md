@@ -201,28 +201,6 @@ Configure the local timezone to UTC:
     sudo timedatectl set-timezone UTC
     ```
 
-Install and configure Apache to serve a Python mod_wsgi application:<br>
-Connected as the *grader* user, follow the following steps.
-
-* Install the Apache engine:
-    ```bash
-    sudo apt-get install apache2
-    ```
-* Check the successful installation of Apache:
-
-    * On your local machine open your browser
-    * Enter your instance's public IP address in the address bar
-    * If the installation was successful, the browser should show the *Apache2 Ubuntu Default Page*
-
-* Install wsgi library functions for your Apache:
-    ```bash
-    sudo apt-get install libapache2-mod-wsgi-py3
-    ```
-* Enable *mod_wsgi*:
-    ```bash
-    sudo a2enmod wsgi
-    ```
-
 Prepare Python 3: 
 
 * Install some general Python libraries:
@@ -261,7 +239,31 @@ Prepare Python 3:
         ```
 <br>
 
+Install and configure Apache to serve a Python mod_wsgi application:<br>
+Connected as the *grader* user, follow the following steps.
+
+* Install the Apache engine:
+    ```bash
+    sudo apt-get install apache2
+    ```
+* Check the successful installation of Apache:
+
+    * On your local machine open your browser
+    * Enter your instance's public IP address in the address bar
+    * If the installation was successful, the browser should show the *Apache2 Ubuntu Default Page*
+
+* Install wsgi library functions for your Apache:
+    ```bash
+    sudo apt-get install libapache2-mod-wsgi-py3
+    ```
+* Enable *mod_wsgi*:
+    ```bash
+    sudo a2enmod wsgi
+    ```
+
+
 Prepare virtual environment tools:
+USING PIPENV
 
 * Install pip:
     ```bash
@@ -296,6 +298,19 @@ Prepare virtual environment tools:
         ```bash
         source ~/.profile
         ```
+
+USING VIRTUALENV
+sudo apt-get install python-virtualenv
+cd /var/www/item_catalog/item_catalog
+sudo virtualenv -p python3.7 venv
+-> root directory of the virtual environment: /var/www/item_catalog/item_catalog/venv
+source venv/bin/activate
+check:
+python --version
+pip --version
+pip list
+sudo ./venv/bin/python -m pip install "Flask==1.1.1"
+
 
 Finally, install git:
 ```bash
@@ -460,3 +475,5 @@ Set up a virtual host for your project:
 * Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS"
 * Many thanks to [Kenneth Reitz](https://www.kennethreitz.org) who authored an [Ubuntu manpage](http://manpages.ubuntu.com/manpages/eoan/man1/pipenv.1.html) about using [pipenv](https://github.com/pypa/pipenv) to manage Python packages when deploying network services
 * Many thanks to [Website for Students](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04
+* Many thanks to Graham Dumpleton, who authored an [user guide](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) on how to use Python virtual environments with mod_wsgi
+* Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with `mod_wsgi` on Ubuntu 16*
