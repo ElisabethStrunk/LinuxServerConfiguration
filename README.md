@@ -228,19 +228,34 @@ Prepare Python 3:
         ```bash
         tar -xf Python-3.7.0.tar.xz
         cd Python-3.7.0
-        ./configure --enable-optimizations
-        ./configure --enable-loadable-sqlite-extensions
-        make -j 1
-        sudo make altinstall
+        sudo ./configure --enable-optimizations
+        sudo ./configure --enable-loadable-sqlite-extensions
+        sudo ./configure --enable-shared
+        sudo make
+        sudo make install
         ```
+    * Create the necessary links and cache to the new shared Python library:
+        
+        * Edit */etc/ld.so.conf* (e.g. with vim):
+            ```bash
+            sudo vim /etc/ld.so.conf
+            ```
+        * Add the following line (do not forget to keep an empty line at the end!):
+            ```bash
+            /usr/local/lib/python3.7
+            ```
+        * create the links and cache:
+            ```bash
+            /sbin/ldconfig -v
+            ```
+        
     * Check if the desired version of Python was successfully installed:
         ```bash
-        python3.7 --version
+        python3 --version
         ```
 <br>
 
-Install and configure Apache to serve a Python mod_wsgi application:<br>
-Connected as the *grader* user, follow the following steps.
+Install Apache:
 
 * Install the Apache engine:
     ```bash
@@ -252,15 +267,69 @@ Connected as the *grader* user, follow the following steps.
     * Enter your instance's public IP address in the address bar
     * If the installation was successful, the browser should show the *Apache2 Ubuntu Default Page*
 
-* Install wsgi library functions for your Apache:
+<br>
+Install and configure mod_wsgi functionalities for Apache to serve a Python mod_wsgi application:<br>
+
+For mod_wsgi to work, the Python application's Python version needs to match the Python version for which mod_wsgi was compiled. If your Python application uses Python 3.5, you can simply use the easy-install option:
+```bash
+sudo apt-get install libapache2-mod-wsgi-py3
+sudo a2enmod wsgi
+```
+If your application needs a different version, you will have to make custom builds of Python and mod_wsgi.<br>
+My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application was developed and tested with Python 3.7, so the following steps are necessary:
+
+* Install prerequisites:
     ```bash
-    sudo apt-get install libapache2-mod-wsgi-py3
-    ```
-* Enable *mod_wsgi*:
-    ```bash
-    sudo a2enmod wsgi
+    sudo apt update
+    sudo apt-get install apache2-dev
+    sudo apt install build-essential checkinstall
+    sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+    sudo apt install libffi-dev
     ```
 
+* Build Python: see last section
+
+* Build mod_wsgi:
+
+    * Download the source code of the desired release from the mod_wsgi download page:
+        ```bash
+        cd /tmp
+        wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.6.5.tar.gz
+        ```
+    * Extract the file and build it using the previously installed Python build:
+        ```bash
+        tar xvfz 4.6.5.tar.gz
+        cd mod_wdgi-4.6.5
+        sudo ./configure --with-python=/usr/local/bin/python3.7
+        sudo make
+        sudo make install
+        ```
+
+* Load the mod_wsgi module into Apache:
+    In the last line of the console log you can see the path of the .so file that was created. Usually this will be */usr/lib/apache2/modules/mod_wsgi.so*.<br>
+    
+    * Look at *wsgi.load*:
+        ```bash
+        cat /etc/apache2/mods-available/wsgi.load
+        ```
+    * Make sure, that it contains the following line (using the path of the .so file from before):
+        ```
+        LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
+        ```
+    * Enable the module and restart Apache:
+        ```bash
+        sudo a2enmod wsgi
+        apachectl stop
+        apachectl start
+        ```
+    * Check, if the modifications were successful:
+        ```bash
+        cat /var/log/apache2/error.log
+        ```
+        You should see an entry with the following message:
+        ```
+        Apache/2.4.18 (Ubuntu) mod_wsgi/4.6.5 Python/3.7 configured -- resuming normal operations
+        ```
 
 Prepare virtual environment tools:
 USING PIPENV
