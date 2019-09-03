@@ -375,7 +375,7 @@ Set up a virtual environment for your project to run in:
     ```
 * Create a virtual environment for your project:
     ```bash
-    sudo virtualenv -p python3.7 venv
+    sudo virtualenv -p python3 venv
     ```
     Take note of the exact path of the root directory of the virtual environment: */var/www/item_catalog/item_catalog/venv*
 * Activate the virtual environment:
@@ -500,6 +500,7 @@ Set up a virtual host for your project:
     apache2ctl configtest
     ```
 
+<br>
 
 ## Author
 
@@ -512,7 +513,6 @@ Set up a virtual host for your project:
 * Huge thanks to [Michael Wales](https://github.com/walesmd) who authored the Udacity course this project is based upon
 * Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) on how to use Apache, Python 3, venv and wsgi together
 * Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS"
-* Many thanks to [Kenneth Reitz](https://www.kennethreitz.org) who authored an [Ubuntu manpage](http://manpages.ubuntu.com/manpages/eoan/man1/pipenv.1.html) about using [pipenv](https://github.com/pypa/pipenv) to manage Python packages when deploying network services
 * Many thanks to [Website for Students](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04
-* Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html)
 * Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with `mod_wsgi` on Ubuntu 16*
+* Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html)
