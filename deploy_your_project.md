@@ -310,5 +310,24 @@ Set up a virtual host for your project:
     cd /etc/apache2
     apache2ctl configtest
     ```
+* Fix any errors or warnings before continuing.
 
 <br>
+
+### Secure your .git directory
+Make sure that your .git directory is not publicly accessible via a browser:
+
+* Create an *.htaccess* file at the root of your web server:
+    ```bash
+    sudo touch /root/.htaccess
+    ```
+* Edit the file (e.g. with vim):
+    ```bash
+    sudo vim /root/.htaccess
+    ```
+* Add the following line:
+    ```bash
+    RedirectMatch 404 /\.git
+    ```
+
+This solution hides all .git directories and even other Git files like .gitignore and .gitmodules.
