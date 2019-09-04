@@ -1,504 +1,80 @@
 # Udacity_FullStack_LinuxServerConfiguration
 Linux server configuration project of the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).<br>
 <br>
-
-## Get your server
-Go to https://lightsail.aws.amazon.com and log in.<br>
-Click on *Create Instance*:<br>
-<kbd><img src="readme_images/create-instance.PNG" width=550></kbd>
-<br>Choose the following configurations for your instance:
-
-* Select your instance location according to your own location.
-* Under *Pick your instance image* -> *Select a platform* choose *Linux/Unix*
-* Under *Pick your instance image* -> *Select a blueprint* first click on *OS Only*, then choose *Ubuntu 16.04 LTS*
-* Under *Pick your instance image* -> *OPTIONAL* click *Change SSH key pair* and create a new SSH key pair by...
-    * clicking on *Create New*
-    * choosing your location
-    * choosing a name for your key pair (profile-server)
-    * click on *Generate Key Pair*
-    * download the key by clicking *Download Key*
-* Under *Choose your instance plan* choose a suitable payment model ($3.50 USD - First month free)
-* Under *Identify your instance* choode a name for your instance (profile-server-elisabeth-strunk)
-
-Click *Create instance*.<br>
-You will be redirected to the *Instances* tab.<br>
-Your new instance is in the progress of being activated. Wait for the activation process to finish. You can see, if the activation process has already finished by looking at the visualization of your new instance:<br>
-**Before:**<br>
-<kbd><img src="readme_images/instance-activation-pending.PNG" width=350></kbd>
-<br>**After:**<br>
-<kbd><img src="readme_images/instance-running.PNG" width=350></kbd>
+<br>
 <br>
 
-## Access your server via SSH
-Use PuTTY or the tool of your choice to connect to your instance. Instructions on how to do this are provided by Amazon.<br>
-To view the instructions:
+## Summary of configurations made
 
-* Click on your instance to go to the instance's site.
-* Make sure you are on the *Connect* tab:<br>
-<kbd><img src="readme_images/instance-site-connect.PNG" width=550></kbd>
-* Click that little *(?)* next to *Connect using your own SSH client*.
+I __set up my server__ on an AWS Lightsail instance choosing *Ubuntu 16.04 LTS* for the operating system.<br>
+A detailed description of all the steps I performed can be found [here](get_your_server.md).<br>
+
+I __secured my server__ by updating all pre-installed packages, changing the default SSH port (incl. adjusting the Lightsail firewall), as well as setting up an Uncomplicated Firewall (UFW).<br>
+A detailed description of all the steps I performed can be found [here](secure_your_server.md).<br>
+
+I __set up a new user__ with sudo permissions so that a Udacity grader will be able to inspect my work. I also disabled password authentication and generated an SSH key pair for the new user, to secure SSH connections to my server.<br>
+A detailed description of all the steps I performed can be found [here](give_grader_access.md).<br>
+
+I __deployed my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project__ onto my server, a Python 3.7 CRUD application developed with Flask and SQLite.<br>
+I performed the following steps to successfully deploy my project:
+
+* Configured and installed a custom build of Python 3.7, incl. SQLite extensions
+* Installed Apache2
+* Configured and installed a custom build of mod_wsgi
+* Loaded the mod_wsgi module into Apache
+* Set up a virtual environment for my application to run in
+* Created a WSGI application from my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project
+* Set up a virtual host to serve my WSGI app
+
+A detailed description of all the steps I performed, as well as the reasons for the neccessity of custom builds of Python and mod_wsgi can be found [here](deploy_your_project.md).<br>
 <br>
 
-## Secure your server
-Make sure the software packages installed on the server are up to date:
-
-* Update the source list:
-    ```bash
-    sudo apt-get update
-    ```
-* Upgrade installed packages:
-    ```bash
-    sudo apt-get upgrade
-    ```
-
-<br>Change the SSH port from 22 to 2200:
-
-* Make sure to configure the Lightsail firewall first:
-
-    * Go to your instance's site on https://lightsail.aws.amazon.com.
-    * Go to the *Networking* tab:<br>
-    <kbd><img src="readme_images/instance-site-networking.PNG" width=550></kbd>
-    * In the *Firewall* section add another rule "Custom TCP 2200"
-
-* Use PuTTY or the tool of your choice to connect to your instance (see *Access your server via SSH* section of this readme)
-* Change the port number:
-
-    * Open */etc/ssh/sshd_config* (e.g. with vim):
-        ```bash
-        sudo vim /etc/ssh/sshd_config
-        ```
-        The *sudo* is important because you need sudoer rights to change the content of the file.
-    * Look for the section titled *# What ports, IPs and protocols we listen for*.
-    * Change the number after *Port* from 22 to 2200.
-    * Save your changes.
-
-* Reboot your instance by clicking the *Reboot* button on your instance's site:<br>
-<kbd><img src="readme_images/reboot-instance.PNG" width=550></kbd> 
-
-After that, if you try connecting on port 22, you will find that this is no longer possible. Instead you have to connect to port 2200 now.
-
-<br>Configure the Uncomplicated Firewall (UFW):
-
-* Check if UFW is active:
-    ```bash
-    sudo ufw status
-    ```
-* It should be inactive. If it is active, disable it using
-    ```bash
-    sudo ufw disable
-    ```
-* Change the settings:
-    ```bash
-    sudo ufw default deny incoming
-    sudo ufw default allow outgoing
-    sudo ufw allow 2200/tcp
-    sudo ufw allow http
-    sudo ufw allow ntp
-    ```
-* Enable UFW:
-    ```bash
-    sudo ufw enable
-    ```
+## Summary of software installed 
+In the following a summary of all software I installed (without dependencies) is given.<br>
 <br>
+### Custom-build software:
 
-## Give grader access
-In order for your project to be reviewed, the grader needs to be able to log in to your server.<br><br>
-SSH into your server and set up a new user with sudo permission:<br>
-Example: user with username *grader*
-```bash
-sudo adduser grader
-```
-During the creation process, you are asked to provide a password. Type in the password and confirm it by typing it in a second time. (udacity-1)<br>
+* Python 3.7.2, incl. SQLite extensions
+* mod_wsgi 4.6.5, compiled for the custom Python 3.7.2 build
 
-A list of users with sudo rights can be found in */etc/sudoers*.
-In Ubuntu, there also is a file */etc/sudoers.d* that gets included in */etc/sudoers*. System updates can override sudoers, but not sudoers.d. That means added super users will not be lost through a system update, if you set them up in *sudoers.d* instead of *sudoers*.<br>
+### Packages from the dpkg packaging system:
 
-So, to give the grader user sudo rights:<br>
+* apache2
+* apache2-dev
+* build-essential
+* checkinstall
+* git
+* libbz2-dev
+* libc6-dev
+* libffi-dev
+* libgdbm-dev
+* liblzma-dev
+* libncurses5-dev
+* libnss3-dev
+* libpq-dev
+* libreadline6-dev
+* libreadline-dev
+* libreadline-gplv2-dev
+* libsqlite3-dev
+* libssl-dev
+* lzma
+* lzma-dev
+* python3-pip
+* python-dev
+* python-virtualenv
+* tk8.5-dev
+* tk-dev
+* wget
+* zlib1g-dev
 
-* Create the sudoers.d file for your new user:
-    ```bash
-    sudo touch /etc/sudoers.d/grader
-    ```
-* Open the file you just created (e.g. with vim):
-    ```bash
-    sudo vim /etc/sudoers.d/grader
-    ```
-* Add the following line to the grader file:
-    ```bash
-    grader ALL=(ALL) NOPASSWD:ALL
-    ```
-<br>
+### Python packages:
 
-Create an SSH key pair for grader using the ssh-keygen tool:<br>
-
-* On your local machine (**not** on your server!) open a bash session and run:
-    ```bash
-    ssh-keygen
-    ```
-* During the keygen process, enter the file (incl. path) in which to save the key (grader_key for example)
-* During the keygen process, enter in a password and confirm it by typing it in a second time.
-* Two files will be generated in the specified path:
-
-    * the private key (grader_key) and 
-    * the public key (grader_key.pub)
-
-* Copy the contents of the file *grader_key.pub* (on your local machine) for later.
-* On your server change into grader:
-    ```bash
-    su grader
-    ```
-* Change into the home directory:
-    ```bash
-    cd ~
-    ```
-* Create a new directory called *.ssh*:
-    ```bash
-    mkdir .ssh
-    ```
-* Create a file called authorized_keys:
-    ```bash
-    sudo touch ~/.ssh/authorized_keys
-    ```
-* Open the file you just created (e.g. with vim):
-    ```bash
-    sudo vim ~/.ssh/authorized_keys
-    ```
-* Paste the content of the file *grader_key.pub* you copied earlier on your local machine into the *authorized_keys* file.
-* Save and exit.
-* Adjust the permissions on the *.ssh* directory and the *authorized_keys* file:
-    ```
-    sudo chmod 700 .ssh
-    sudo chmod 644 .ssh/authorized_keys
-    ```
-* Give *grader* ownership over the *authorized_keys* file:
-    ```
-    sudo chown -R grader.grader /home/grader/.ssh
-    ```
-* Check the */etc/ssh/sshd_config* file if *PasswordAuthentication* is set to *no*:
-    ```bash
-    cat /etc/ssh/sshd_config
-    ```
-* If it is not set to no, set it to no by editing */etc/ssh/sshd_config* (e.g. with vim).
-* Restart SSH:
-    ```
-    sudo service ssh restart
-    ```
-
-Now on a remote machine you can use the private key file (grader_key) to connect to the grader user on the server - using the same procedure as you did before with the default user and the Lightsail key pair.
-<br>
-
-## Prepare to deploy your Python 3 Flask project
-Please note that the following instructions are suitable, if you want to deploy a **Python 3 Flask** application onto your server. Other kinds of applications (including Python 2 applications) need different prerequisites that are not covered here!
-
-Configure the local timezone to UTC:
-
-* Check the timezone:
-    ```bash
-    date
-    ```
-* If the timezone is not set to UTC, change the timezone to UTC:
-    ```bash
-    sudo timedatectl set-timezone UTC
-    ```
-
-Prepare Python 3: 
-
-* Install some general Python libraries:
-    ```bash
-    sudo apt-get install libpq-dev python-dev
-    ```
-* Install the needed Python version:<br>
-    Ubuntu 16.04 comes with Python 3.5. If your application needs Python 3.6 or higher, you have to manually install the required Python version. (If your application runs fine with Python 3.5, skip the following steps.)<br>
-    Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application was developed and tested on Python 3.7.0.
-
-    * Ubuntu 16.04's *apt-get* does not find the python3.7 package, so you need to install it from its source code. This requires the installation of the following packages first:
-        ```bash
-        sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
-        for pkg in build-essential zlib1g-dev libbz2-dev liblzma-dev libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev libgdbm-devliblzma-dev tk8.5-dev lzma lzma-dev libgdbm-dev
-        do
-            sudo apt-get -y install $pkg
-        done
-        ```
-    * Download the source code of the desired Python release from the Python download page:
-        ```bash
-        cd /tmp
-        wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
-        ```
-    * Extract the file and install:
-        ```bash
-        tar -xf Python-3.7.0.tar.xz
-        cd Python-3.7.0
-        sudo ./configure --enable-optimizations
-        sudo ./configure --enable-loadable-sqlite-extensions
-        sudo ./configure --enable-shared
-        sudo make
-        sudo make install
-        ```
-    * Create the necessary links and cache to the new shared Python library:
-        
-        * Edit */etc/ld.so.conf* (e.g. with vim):
-            ```bash
-            sudo vim /etc/ld.so.conf
-            ```
-        * Add the following line (do not forget to keep an empty line at the end!):
-            ```bash
-            /usr/local/lib/python3.7
-            ```
-        * create the links and cache:
-            ```bash
-            /sbin/ldconfig -v
-            ```
-        
-    * Check if the desired version of Python was successfully installed:
-        ```bash
-        python3 --version
-        ```
-<br>
-
-Install Apache:
-
-* Install the Apache engine:
-    ```bash
-    sudo apt-get install apache2
-    ```
-* Check the successful installation of Apache:
-
-    * On your local machine open your browser
-    * Enter your instance's public IP address in the address bar
-    * If the installation was successful, the browser should show the *Apache2 Ubuntu Default Page*
-
-<br>
-Install and configure mod_wsgi functionalities for Apache to serve a Python mod_wsgi application:<br>
-
-For mod_wsgi to work, the Python application's Python version needs to match the Python version for which mod_wsgi was compiled. If your Python application uses Python 3.5, you can simply use the easy-install option:
-```bash
-sudo apt-get install libapache2-mod-wsgi-py3
-sudo a2enmod wsgi
-```
-If your application needs a different version, you will have to make custom builds of Python and mod_wsgi.<br>
-My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application was developed and tested with Python 3.7, so the following steps are necessary:
-
-* Install prerequisites:
-    ```bash
-    sudo apt update
-    sudo apt-get install apache2-dev
-    sudo apt install build-essential checkinstall
-    sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-    sudo apt install libffi-dev
-    ```
-
-* Build Python: see last section
-
-* Build mod_wsgi:
-
-    * Download the source code of the desired release from the mod_wsgi download page:
-        ```bash
-        cd /tmp
-        wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.6.5.tar.gz
-        ```
-    * Extract the file and build it using the previously installed Python build:
-        ```bash
-        tar xvfz 4.6.5.tar.gz
-        cd mod_wdgi-4.6.5
-        sudo ./configure --with-python=/usr/local/bin/python3.7
-        sudo make
-        sudo make install
-        ```
-
-* Load the mod_wsgi module into Apache:
-    In the last line of the console log you can see the path of the .so file that was created. Usually this will be */usr/lib/apache2/modules/mod_wsgi.so*.<br>
-    
-    * Look at *wsgi.load*:
-        ```bash
-        cat /etc/apache2/mods-available/wsgi.load
-        ```
-    * Make sure, that it contains the following line (using the path of the .so file from before):
-        ```
-        LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
-        ```
-    * Enable the module and restart Apache:
-        ```bash
-        sudo a2enmod wsgi
-        apachectl stop
-        apachectl start
-        ```
-    * Check, if the modifications were successful:
-        ```bash
-        cat /var/log/apache2/error.log
-        ```
-        You should see an entry with the following message:
-        ```
-        Apache/2.4.18 (Ubuntu) mod_wsgi/4.6.5 Python/3.7 configured -- resuming normal operations
-        ```
-
-Prepare virtual environment tools:
-
-* Install pip:
-    ```bash
-    sudo apt-get install python3-pip
-    ```
-* Install virtualenv for Python:
-    ```bash
-    sudo apt-get install python-virtualenv
-    ```
-
-Finally, install git:
-```bash
-sudo apt-get install git
-```
-<br>
-
-## Deploy a project onto your server
-Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project.<br>
-
-Clone and setup your Python Flask project from a Github repository you created earlier:<br>
-
-* Create your project folder:
-    ```bash
-    sudo mkdir /var/www/item_catalog
-    ```
-* Clone your repository into the folder:<br>
-    ```bash
-    cd /var/www/item_catalog
-    sudo git clone https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog.git
-    ```
-* Rename the project to the name you want it referred to on your server:
-    ```bash
-    sudo mv ./Udacity_FullStack_ItemCatalog ./item_catalog
-    ```
-
-Set up a virtual environment for your project to run in:
-
-* Change into you project's directory:
-    ```bash
-    cd /var/www/item_catalog/item_catalog
-    ```
-* Create a virtual environment for your project:
-    ```bash
-    sudo virtualenv -p python3 venv
-    ```
-    Take note of the exact path of the root directory of the virtual environment: */var/www/item_catalog/item_catalog/venv*
-* Activate the virtual environment:
-    ```bash
-    source venv/bin/activate
-    ```
-* Check if the Python version and the Python version for pip is the right one (as per your application's requirements):
-    ```bash
-    python --version
-    pip --version
-    ```
-* Install all packages your project depends on, using pip and the python binary of your project's virtual environment. In case of my *Item Catalog* project:
-    ```bash
-    sudo ./venv/bin/python -m pip install "httplib2==0.13.1"
-    sudo ./venv/bin/python -m pip install "Flask==1.1.1"
-    sudo ./venv/bin/python -m pip install "oauth2client==4.1.3"
-    sudo ./venv/bin/python -m pip install "requests==2.22.0"
-    sudo ./venv/bin/python -m pip install "SQLAlchemy==1.3.6"
-    sudo ./venv/bin/python -m pip install "bleach==3.1.0"
-    ```
-* Check, if all packages were installed within the virtual environment:
-    ```bash
-    pip list
-    ```
-* Check, if your application is runnable (virtual environment must be activated):
-    ```bash
-    python application.py
-    ```
-* Deactivate the virtual environment again:
-    ```bash
-    deactivate
-    ```
-
-Add an *\_\_init\_\_.py* to your project:
-
-* Create the file (if it does not already exist):
-    ```bash
-    touch /var/www/item_catalog/item_catalog/app/__init__.py
-    ```
-* Edit the file (e.g. with vim):
-    ```bash
-    sudo vim /var/www/item_catalog/item_catalog/app/__init__.py
-    ```
-* Add an import of the Flask application object (in my project the object is called *app*):
-    ```python
-    from .application import app
-    ```
-
-Create the .wsgi file:
-
-* Create a .wsgi file in the outer directory of your project folder:
-    ```bash
-    sudo touch /var/www/item_catalog/item_catalog.wsgi
-    ```
-* Edit *item_catalog.wsgi* (e.g. by using *vim*):
-    ```bash
-    sudo vim /var/www/item_catalog/item_catalog.wsgi
-    ```
-* Add the following lines, using the path where your application directory is located:
-    ```bash
-    import sys
-    import logging
-    logging.basicConfig(stream=sys.stderr)
-    sys.path.insert(0,"/var/www/item_catalog/item_catalog")
-    from app import app as application
-    ```
-
-Set up a virtual host for your project:
-
-* Look up the exact path of the root directory of the virtual environment that you took note of earlier (*/var/www/item_catalog/item_catalog/venv* in my example).<br>
-    Copy the path for later.
-* Create an Apache site configuration file:
-    ```bash
-    sudo touch /etc/apache2/sites-available/item_catalog.conf
-    ```
-* Edit the configuration file (e.g. with vim):
-    ```bash
-    sudo vim /etc/apache2/sites-available/item_catalog.conf
-    ```
-* Add the following lines, using your instance's public IP address and the path of the root directory of the virtual environment you copied earlier:
-    ```
-    <VirtualHost *:80>
-        ServerName YOUR_INSTANCES_IP_ADDRESS_HERE
-        ServerAlias YOUR_REMOTE_NAME_SERVER_HERE (optional)
-        ServerAdmin ubuntu@YOUR_INSTANCES_IP_ADDRESS_HERE
-
-        WSGIDaemonProcess item_catalog python-home=YOUR_PATH_TO_VENV_ROOT_DIRECTORY_HERE
-        WSGIProcessGroup item_catalog
-        WSGIApplicationGroup %{GLOBAL}
-
-        WSGIScriptAlias /item_catalog /var/www/item_catalog/item_catalog.wsgi
-
-        <Directory /var/www/item_catalog>
-        <IfVersion < 2.4>
-            Order allow,deny
-            Allow from all
-        </IfVersion>
-        <IfVersion >= 2.4>
-            Require all granted
-        </IfVersion>
-        </Directory>
-        
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        LogLevel warn
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-    </VirtualHost>
-    ```
-* Enable the virtual host:
-    ```bash
-    cd /etc/apache2/sites-available
-    sudo a2ensite item_catalog.conf
-    ```
-* Activate the new Apache configurations:
-    ```bash
-    sudo service apache2 reload
-    sudo service apache2 restart
-    ```
-    Or reboot your instance.
-* Test your conf files:
-    ```bash
-    cd /etc/apache2
-    apache2ctl configtest
-    ```
+* bleach
+* Flask
+* httplib2
+* oauth2client
+* requests
+* SQLAlchemy
 
 <br>
 
@@ -506,7 +82,8 @@ Set up a virtual host for your project:
 
 **Elisabeth Strunk**<br>
 <img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
-<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>
+<br>
 
 ## Acknowledgments
 
