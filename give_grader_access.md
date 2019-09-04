@@ -1,18 +1,22 @@
-## Give grader access
+# Give grader access
+
 In order for your project to be reviewed, the grader needs to be able to log in to your server.<br><br>
-SSH into your server and set up a new user with sudo permission:<br>
-Example: user with username *grader*
+Example: user with username *"grader"*<br>
+<br>
+
+## Set up a new user with sudo permission
+SSH into your server.<br>
+Add a new user:
 ```bash
 sudo adduser grader
 ```
-During the creation process, you are asked to provide a password. Type in the password and confirm it by typing it in a second time. (udacity-1)<br>
+During the creation process, you are asked to provide a password. Type in the password and confirm it by typing it in a second time.<br>
+<br>
+A list of users with sudo rights can be found in */etc/sudoers*.<br>
+In Ubuntu, there also is a file */etc/sudoers.d* that gets included in */etc/sudoers*. System updates can override *sudoers*, but not *sudoers.d*. That means added super users will not be lost through a system update, if you set them up in *sudoers.d* instead of *sudoers*.<br>
+So, to give the grader user sudo rights:
 
-A list of users with sudo rights can be found in */etc/sudoers*.
-In Ubuntu, there also is a file */etc/sudoers.d* that gets included in */etc/sudoers*. System updates can override sudoers, but not sudoers.d. That means added super users will not be lost through a system update, if you set them up in *sudoers.d* instead of *sudoers*.<br>
-
-So, to give the grader user sudo rights:<br>
-
-* Create the sudoers.d file for your new user:
+* Create the *sudoers.d* file for your new user:
     ```bash
     sudo touch /etc/sudoers.d/grader
     ```
@@ -26,20 +30,22 @@ So, to give the grader user sudo rights:<br>
     ```
 <br>
 
-Create an SSH key pair for grader using the ssh-keygen tool:<br>
+## Secure SSH connection to the new user
+Create an SSH key pair for grader using the ssh-keygen tool:
 
 * On your local machine (**not** on your server!) open a bash session and run:
     ```bash
     ssh-keygen
     ```
-* During the keygen process, enter the file (incl. path) in which to save the key (grader_key for example)
+* During the keygen process, enter the file (incl. path) in which to save the key (*grader_key* for example).
 * During the keygen process, enter in a password and confirm it by typing it in a second time.
 * Two files will be generated in the specified path:
 
-    * the private key (grader_key) and 
-    * the public key (grader_key.pub)
+    * the private key (*grader_key*) and 
+    * the public key (*grader_key.pub*)
 
 * Copy the contents of the file *grader_key.pub* (on your local machine) for later.
+* SSH into your server.
 * On your server change into grader:
     ```bash
     su grader
@@ -52,7 +58,7 @@ Create an SSH key pair for grader using the ssh-keygen tool:<br>
     ```bash
     mkdir .ssh
     ```
-* Create a file called authorized_keys:
+* Create a file called *authorized_keys*:
     ```bash
     sudo touch ~/.ssh/authorized_keys
     ```

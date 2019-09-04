@@ -1,7 +1,11 @@
-## Prepare to deploy your Python 3 Flask project
-Please note that the following instructions are suitable, if you want to deploy a **Python 3 Flask** application onto your server. Other kinds of applications (including Python 2 applications) need different prerequisites that are not covered here!
+# Deploy your project
+Please note that the following instructions are suitable, if you want to deploy a **Python 3 Flask** application onto your server. Other kinds of applications (including Python 2 applications) need different prerequisites that are not covered here!<br>
+<br>
+Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project.<br>
+<br>
 
-Configure the local timezone to UTC:
+## Prepare to deploy your Python 3 Flask project
+### Configure the local timezone to UTC:
 
 * Check the timezone:
     ```bash
@@ -12,7 +16,9 @@ Configure the local timezone to UTC:
     sudo timedatectl set-timezone UTC
     ```
 
-Prepare Python 3: 
+<br>
+
+### Prepare Python 3: 
 
 * Install some general Python libraries:
     ```bash
@@ -20,7 +26,7 @@ Prepare Python 3:
     ```
 * Install the needed Python version:<br>
     Ubuntu 16.04 comes with Python 3.5. If your application needs Python 3.6 or higher, you have to manually install the required Python version. (If your application runs fine with Python 3.5, skip the following steps.)<br>
-    Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application uses Python 3.6 features, so an upgrade is neccessary. The application was developed and tested on Python 3.7.2, so this version was chosen for the upgrade. 
+    My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application uses Python 3.6 features, so an upgrade is neccessary. The application was developed and tested on Python 3.7.2, so this version was chosen for the upgrade. 
 
     * Ubuntu 16.04's *apt-get* does not find the python3.7 package, so you need to install it from its source code. Furthermore, my application uses an SQLite database. So it is neccessary to configure the Python build accordingly. This requires the installation of the following packages first:
         ```bash
@@ -66,7 +72,7 @@ Prepare Python 3:
         ```
 <br>
 
-Install Apache:
+### Install Apache:
 
 * Install the Apache engine:
     ```bash
@@ -79,6 +85,8 @@ Install Apache:
     * If the installation was successful, the browser should show the *Apache2 Ubuntu Default Page*
 
 <br>
+
+### Set up mod_wsgi:
 Install and configure mod_wsgi functionalities for Apache to serve a Python mod_wsgi application:<br>
 
 For mod_wsgi to work, the Python application's Python version needs to match the Python version for which mod_wsgi was compiled. If your Python application uses Python 3.5, you can simply use the easy-install option:
@@ -87,7 +95,7 @@ sudo apt-get install libapache2-mod-wsgi-py3
 sudo a2enmod wsgi
 ```
 If your application needs a different version, you will have to make custom builds of Python and mod_wsgi.<br>
-My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application was developed and tested with Python 3.7, so the following steps are necessary:
+My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application will use Python 3.7, so the following steps are necessary:
 
 * Install prerequisites:
     ```bash
@@ -98,7 +106,7 @@ My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCat
     sudo apt install libffi-dev
     ```
 
-* Build Python: see last section
+* Build Python: Already done -> see previous section.
 
 * Build mod_wsgi:
 
@@ -116,7 +124,7 @@ My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCat
         sudo make install
         ```
 
-* Load the mod_wsgi module into Apache:
+* Load the mod_wsgi module into Apache:<br>
     In the last line of the console log you can see the path of the .so file that was created. Usually this will be */usr/lib/apache2/modules/mod_wsgi.so*.<br>
     
     * Look at *wsgi.load*:
@@ -142,7 +150,9 @@ My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCat
         Apache/2.4.18 (Ubuntu) mod_wsgi/4.6.5 Python/3.7 configured -- resuming normal operations
         ```
 
-Prepare virtual environment tools:
+<br>
+
+### Prepare virtual environment tools:
 
 * Install pip:
     ```bash
@@ -153,7 +163,9 @@ Prepare virtual environment tools:
     sudo apt-get install python-virtualenv
     ```
 
-Finally, install git:
+<br>
+
+### Install git:
 ```bash
 sudo apt-get install git
 ```
@@ -162,7 +174,8 @@ sudo apt-get install git
 ## Deploy a project onto your server
 Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project.<br>
 
-Clone and setup your Python Flask project from a Github repository you created earlier:<br>
+### Clone and set up your project:
+Clone your Python Flask project from a GitHub repository you created earlier:<br>
 
 * Create your project folder:
     ```bash
@@ -178,7 +191,26 @@ Clone and setup your Python Flask project from a Github repository you created e
     sudo mv ./Udacity_FullStack_ItemCatalog ./item_catalog
     ```
 
-Set up a virtual environment for your project to run in:
+<br>
+
+Add an *\_\_init\_\_.py* to your project:
+
+* Create the file (if it does not already exist):
+    ```bash
+    touch /var/www/item_catalog/item_catalog/app/__init__.py
+    ```
+* Edit the file (e.g. with vim):
+    ```bash
+    sudo vim /var/www/item_catalog/item_catalog/app/__init__.py
+    ```
+* Add an import of the Flask application object (in my project the object is called *app*):
+    ```python
+    from .application import app
+    ```
+
+<br>
+
+### Set up a virtual environment for your project to run in:
 
 * Change into you project's directory:
     ```bash
@@ -220,22 +252,9 @@ Set up a virtual environment for your project to run in:
     deactivate
     ```
 
-Add an *\_\_init\_\_.py* to your project:
+<br>
 
-* Create the file (if it does not already exist):
-    ```bash
-    touch /var/www/item_catalog/item_catalog/app/__init__.py
-    ```
-* Edit the file (e.g. with vim):
-    ```bash
-    sudo vim /var/www/item_catalog/item_catalog/app/__init__.py
-    ```
-* Add an import of the Flask application object (in my project the object is called *app*):
-    ```python
-    from .application import app
-    ```
-
-Create the .wsgi file:
+### Create the .wsgi file:
 
 * Create a .wsgi file in the outer directory of your project folder:
     ```bash
@@ -254,7 +273,9 @@ Create the .wsgi file:
     from app import app as application
     ```
 
-Set up a virtual host for your project:
+<br>
+
+### Set up a virtual host for your project:
 
 * Look up the exact path of the root directory of the virtual environment that you took note of earlier (*/var/www/item_catalog/item_catalog/venv* in my example).<br>
     Copy the path for later.

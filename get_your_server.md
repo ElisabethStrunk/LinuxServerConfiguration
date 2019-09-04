@@ -1,3 +1,5 @@
+# Set up your server
+
 ## Get your server
 Go to https://lightsail.aws.amazon.com and log in.<br>
 Click on *Create Instance*:<br>
@@ -5,16 +7,16 @@ Click on *Create Instance*:<br>
 <br>Choose the following configurations for your instance:
 
 * Select your instance location according to your own location.
-* Under *Pick your instance image* -> *Select a platform* choose *Linux/Unix*
-* Under *Pick your instance image* -> *Select a blueprint* first click on *OS Only*, then choose *Ubuntu 16.04 LTS*
+* Under *Pick your instance image* -> *Select a platform* choose *Linux/Unix*.
+* Under *Pick your instance image* -> *Select a blueprint* first click on *OS Only*, then choose *Ubuntu 16.04 LTS*.
 * Under *Pick your instance image* -> *OPTIONAL* click *Change SSH key pair* and create a new SSH key pair by...
     * clicking on *Create New*
     * choosing your location
-    * choosing a name for your key pair (profile-server)
+    * choosing a name for your key pair
     * click on *Generate Key Pair*
     * download the key by clicking *Download Key*
-* Under *Choose your instance plan* choose a suitable payment model ($3.50 USD - First month free)
-* Under *Identify your instance* choode a name for your instance (profile-server-elisabeth-strunk)
+* Under *Choose your instance plan* choose a suitable payment model.
+* Under *Identify your instance* choode a name for your instance.
 
 Click *Create instance*.<br>
 You will be redirected to the *Instances* tab.<br>
@@ -33,4 +35,5 @@ To view the instructions:
 * Make sure you are on the *Connect* tab:<br>
 <kbd><img src="readme_images/instance-site-connect.PNG" width=550></kbd>
 * Click that little *(?)* next to *Connect using your own SSH client*.
+* Follow the instructions.
 <br>

@@ -1,4 +1,6 @@
-## Secure your server
+# Secure your server
+
+## Update all pre-installed packages
 Make sure the software packages installed on the server are up to date:
 
 * Update the source list:
@@ -10,7 +12,10 @@ Make sure the software packages installed on the server are up to date:
     sudo apt-get upgrade
     ```
 
-<br>Change the SSH port from 22 to 2200:
+<br>
+
+## Change the default SSH port
+Change the SSH port from 22 to 2200:
 
 * Make sure to configure the Lightsail firewall first:
 
@@ -19,7 +24,7 @@ Make sure the software packages installed on the server are up to date:
     <kbd><img src="readme_images/instance-site-networking.PNG" width=550></kbd>
     * In the *Firewall* section add another rule "Custom TCP 2200"
 
-* Use PuTTY or the tool of your choice to connect to your instance (see *Access your server via SSH* section of this readme)
+* Use PuTTY or the tool of your choice to connect to your instance (see the *Access your server via SSH* section of [this](get_your_server.md) document).
 * Change the port number:
 
     * Open */etc/ssh/sshd_config* (e.g. with vim):
@@ -35,8 +40,10 @@ Make sure the software packages installed on the server are up to date:
 <kbd><img src="readme_images/reboot-instance.PNG" width=550></kbd> 
 
 After that, if you try connecting on port 22, you will find that this is no longer possible. Instead you have to connect to port 2200 now.
+<br>
 
-<br>Configure the Uncomplicated Firewall (UFW):
+## Set up an Uncomplicated Firewall (UFW)
+Configure the Uncomplicated Firewall (UFW):
 
 * Check if UFW is active:
     ```bash
