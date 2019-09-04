@@ -1,6 +1,6 @@
 # Udacity_FullStack_LinuxServerConfiguration
 Linux server configuration project of the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).<br>
-For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app.<br>
+For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, as well as installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app.<br>
 <br>
 This README gives an overview over the work I did for this project. It also includes links to detailed descriptions of all steps I did along the way. These descriptions are written in a tutorial-like form, so they can be used as guidelines for myself and the whole GitHub community when setting up a Linux server to serve Python 3.7 applications as WSGI apps.<br>
 A list of third-party resources I used to complete this project can be found at the end of this README in the *Acknowledgements* section.<br>
@@ -13,15 +13,15 @@ You are very welcome to visit my server:<br>
 ## Summary of configurations made
 
 I __set up my server__ on an AWS Lightsail instance choosing *Ubuntu 16.04 LTS* for the operating system.<br>
-A detailed description of all the steps I performed can be found [here](get_your_server.md).<br>
+A detailed description of all the steps I performed to achieve this can be found [here](get_your_server.md).<br>
 
 I __secured my server__ by updating all pre-installed packages, changing the default SSH port (incl. adjusting the Lightsail firewall), as well as setting up an Uncomplicated Firewall (UFW).<br>
-A detailed description of all the steps I performed can be found [here](secure_your_server.md).<br>
+A detailed description of all the steps I performed to achieve this can be found [here](secure_your_server.md).<br>
 
 I __set up a new user__ with sudo permissions so that a Udacity grader will be able to inspect my work. I also disabled password authentication and generated an SSH key pair for the new user, to secure SSH connections to my server.<br>
-A detailed description of all the steps I performed can be found [here](give_grader_access.md).<br>
+A detailed description of all the steps I performed to achieve this can be found [here](give_grader_access.md).<br>
 
-I __deployed my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project__ onto my server, a Python 3.7 CRUD application developed with Flask and SQLite.<br>
+I __deployed my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project__ onto my server; a Python 3.7 CRUD application developed with Flask and SQLite.<br>
 I performed the following steps to successfully deploy my project:
 
 * Configured and installed a custom build of Python 3.7, incl. SQLite extensions
@@ -31,6 +31,7 @@ I performed the following steps to successfully deploy my project:
 * Set up a virtual environment for my application to run in
 * Created a WSGI application from my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project
 * Set up a virtual host to serve my WSGI app
+* Made sure that the .git directories on my server are not publicly accessible via a browser
 
 A detailed description of all the steps I performed, as well as the reasons for the neccessity of custom builds of Python and mod_wsgi can be found [here](deploy_your_project.md).<br>
 <br>
@@ -50,6 +51,7 @@ In the following a summary of all software I installed (without dependencies) is
 * build-essential
 * checkinstall
 * git
+* libapache2-mod-wsgi-py3
 * libbz2-dev
 * libc6-dev
 * libffi-dev
@@ -93,9 +95,11 @@ In the following a summary of all software I installed (without dependencies) is
 
 ## Acknowledgments
 
-* Huge thanks to [Michael Wales](https://github.com/walesmd) who authored the Udacity course this project is based upon
-* Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) on how to use Apache, Python 3, venv and wsgi together
-* Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS"
-* Many thanks to [Website for Students](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04
-* Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with `mod_wsgi` on Ubuntu 16*
-* Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html)
+* Huge thanks to [Michael Wales](https://github.com/walesmd) who authored the Udacity course this project is based upon.
+* Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) on how to use Apache, Python 3, venv and wsgi together.
+* Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS".
+* Many thanks to [*Website for Students*](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04.
+* Many thanks to [*fastzombies*](https://stackoverflow.com/users/6615775/fastzombies) who provided a [bash code snippet](https://stackoverflow.com/a/38648131/10917711) that helped me to successfully build the SQLite module into the Python custom build.
+* Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with 'mod_wsgi' on Ubuntu 16*.
+* Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html).
+* Many thanks to [Bennett McElwee](https://github.com/bennettmcelwee), who describes a [method](https://stackoverflow.com/a/17916515/10917711) to make sure that .git directories cannot be publicly accessed via a browser.
