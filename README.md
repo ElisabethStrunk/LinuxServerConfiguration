@@ -1,7 +1,13 @@
 # Udacity_FullStack_LinuxServerConfiguration
 Linux server configuration project of the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).<br>
+For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app.<br>
 <br>
+This README gives an overview over the work I did for this project. It also includes links to detailed descriptions of all steps I did along the way. These descriptions are written in a tutorial-like form, so they can be used as guidelines for myself and the whole GitHub community when setting up a Linux server to serve Python 3.7 applications as WSGI apps.<br>
+A list of third-party resources I used to complete this project can be found at the end of this README in the *Acknowledgements* section.<br>
 <br>
+You are very welcome to visit my server:<br>
+**IP address**: 18.185.17.106<br>
+**URL**:        http://18.185.17.106/<br>
 <br>
 
 ## Summary of configurations made
