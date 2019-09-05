@@ -65,4 +65,16 @@ Configure the Uncomplicated Firewall (UFW):
     ```bash
     sudo ufw enable
     ```
+
 <br>
+
+## Make sure that logging in as root user via SSH is not possible
+It is good practice to prevent remote login for the root user to make brute force attacks even harder.<br>
+To disable remote root login:
+
+* Edit the *sshd_config* file (e.g. with vim):
+    ```bash
+    sudo vim /etc/ssh/sshd_config
+    ```
+* Look for the section titled *# Authentication* and make sure that *PermitRootLogin* is set to *no*.
+

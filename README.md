@@ -15,8 +15,14 @@ You are very welcome to visit my server:<br>
 I __set up my server__ on an AWS Lightsail instance choosing *Ubuntu 16.04 LTS* for the operating system.<br>
 A detailed description of all the steps I performed to achieve this can be found [here](get_your_server.md).<br>
 
-I __secured my server__ by updating all pre-installed packages, changing the default SSH port (incl. adjusting the Lightsail firewall), as well as setting up an Uncomplicated Firewall (UFW).<br>
-A detailed description of all the steps I performed to achieve this can be found [here](secure_your_server.md).<br>
+I __secured my server__ by implementing the following security measures:
+
+* Updated all pre-installed packages
+* Changed the default SSH port (incl. adjusting the Lightsail firewall)
+* Set up an Uncomplicated Firewall (UFW)
+* Made sure that logging in as root user via SSH is not possible
+
+A detailed description of all the steps can be found [here](secure_your_server.md).<br>
 
 I __set up a new user__ with sudo permissions so that a Udacity grader will be able to inspect my work. I also disabled password authentication and generated an SSH key pair for the new user, to secure SSH connections to my server.<br>
 A detailed description of all the steps I performed to achieve this can be found [here](give_grader_access.md).<br>
