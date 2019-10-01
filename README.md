@@ -102,7 +102,7 @@ In the following a summary of all software I installed (without dependencies) is
 ## Acknowledgments
 
 * Huge thanks to [Michael Wales](https://github.com/walesmd) who authored the Udacity course this project is based upon.
-* Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) on how to use Apache, Python 3, venv and wsgi together.
+* Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/blob/master/python3+venv+wsgi/README.md) on how to use Apache, Python 3, venv and wsgi together.
 * Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS".
 * Many thanks to [*Website for Students*](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04.
 * Many thanks to [*fastzombies*](https://stackoverflow.com/users/6615775/fastzombies) who provided a [bash code snippet](https://stackoverflow.com/a/38648131/10917711) that helped me to successfully build the SQLite module into the Python custom build.
