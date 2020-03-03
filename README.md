@@ -6,8 +6,8 @@ This README gives an overview over the work I did for this project. It also incl
 A list of third-party resources I used to complete this project can be found at the end of this README in the *Acknowledgements* section.<br>
 <br>
 You are very welcome to visit my server:<br>
-**IP address**: 18.185.17.106<br>
-**URL**:        http://18.185.17.106/<br>
+**IP address**: 3.127.90.165<br>
+**URL**:        http://3.127.90.165/<br>
 <br>
 
 ## Summary of configurations made
