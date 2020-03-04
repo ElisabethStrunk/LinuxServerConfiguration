@@ -1,13 +1,13 @@
 # Udacity_FullStack_LinuxServerConfiguration
 Linux server configuration project of the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).<br>
-For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, as well as installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app.<br>
+For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, as well as installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app. I also connected a custom domain to my server.<br>
 <br>
 This README gives an overview over the work I did for this project. It also includes links to detailed descriptions of all steps I did along the way. These descriptions are written in a tutorial-like form, so they can be used as guidelines for myself and the whole GitHub community when setting up a Linux server to serve Python 3.7 applications as WSGI apps.<br>
 A list of third-party resources I used to complete this project can be found at the end of this README in the *Acknowledgements* section.<br>
 <br>
 You are very welcome to visit my server:<br>
-**IP address**: 3.127.90.165<br>
-**URL**:        http://3.127.90.165/<br>
+**Profile Site:**       http://elisabethstrunk.me/<br>
+**Item Catalog App:**   http://elisabethstrunk.me/item_catalog/catalog/
 <br>
 
 ## Summary of configurations made
@@ -40,6 +40,9 @@ I performed the following steps to successfully deploy my project:
 * Made sure that the .git directories on my server are not publicly accessible via a browser
 
 A detailed description of all the steps I performed, as well as the reasons for the neccessity of custom builds of Python and mod_wsgi can be found [here](deploy_your_project.md).<br>
+
+I __connected a custom domain to my server__ using GoDaddy as registrar for my domain.<br>
+A detailed description of all the steps I performed to achieve this can be found [here](connect_your_domain.md).<br>
 <br>
 
 ## Summary of software installed 
