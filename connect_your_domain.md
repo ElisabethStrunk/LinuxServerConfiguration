@@ -68,3 +68,24 @@ You have to change the nameserver records for your domain:
 
 It can take up to **48 hours** for GoDaddy to propagate the nameserver records!<br>
 After that, your server can be reached at your domain.
+<br>
+
+## OPTIONAL: Update your virtual host configuration to contain your domain
+Since the IP address is now linked to your domain, the virtual host's configuration file can be updated again to contain your domain instead of the static IP address:
+
+* Connect to your server using your static IP address and your private key.
+* Edit the configuration file (e.g. with vim):
+    ```bash
+    sudo vim /etc/apache2/sites-available/item_catalog.conf
+    ```
+* Change *ServerName*, *ServerAlias* and *ServerAdmin* to contain your domain:
+    ```bash
+    ServerName elisabethstrunk.me
+    ServerAlias www.elisabethstrunk.me
+    ServerAdmin ubuntu@elisabethstrunk.me
+    ```
+* Save your changes and activate the new Apache configurations:
+    ```bash
+    sudo service apache2 reload
+    sudo service apache2 restart
+    ```
