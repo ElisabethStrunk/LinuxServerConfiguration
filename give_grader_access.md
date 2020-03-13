@@ -1,6 +1,10 @@
-# Give grader access
+# Set up a new user
 
-In order for your project to be reviewed, the grader needs to be able to log in to your server.<br><br>
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
+Originally this project started out as a student project for the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004), called *Linux server configuration project*. In order for a Udacity grader to be able to inspect my work, I had to set up a new user with sudo permissions.<br>
+
+The following describes the steps neccessary to set up such a new user.<br><br>
 Example: user with username *"grader"*<br>
 <br>
 
@@ -87,5 +91,11 @@ Create an SSH key pair for grader using the ssh-keygen tool:
     sudo service ssh restart
     ```
 
-Now on a remote machine you can use the private key file (grader_key) to connect to the grader user on the server - using the same procedure as you did before with the default user and the Lightsail key pair.
+Now on a remote machine you can use the private key file (grader_key) to connect to the grader user on the server - using the same procedure as you did before with the default user and the Lightsail key pair.<br>
 <br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>

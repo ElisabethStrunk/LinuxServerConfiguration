@@ -1,5 +1,7 @@
 # Connect your domain to your server
 
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
 When I started this project, I did already own a domain. My domain is registered with [GoDaddy](https://godaddy.com/), so the following steps are using GoDaddy as an example for an internet domain registrar.
 
 ## Get your domain
@@ -89,3 +91,11 @@ Since the IP address is now linked to your domain, the virtual host's configurat
     sudo service apache2 reload
     sudo service apache2 restart
     ```
+
+<br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>

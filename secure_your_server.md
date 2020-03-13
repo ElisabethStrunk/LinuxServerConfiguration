@@ -1,5 +1,10 @@
 # Secure your server
 
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
+The following describes how to secure your Amazon Lightsail server from a number of attack vectors.<br>
+<br>
+
 ## Update all pre-installed packages
 Make sure the software packages installed on the server are up to date:
 
@@ -78,3 +83,10 @@ To disable remote root login:
     ```
 * Look for the section titled *# Authentication* and make sure that *PermitRootLogin* is set to *no*.
 
+<br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>

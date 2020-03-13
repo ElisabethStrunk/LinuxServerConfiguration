@@ -1,8 +1,10 @@
 # Set up a TLS/SSL certificate
 
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
 The web application I deployed onto my server has a user authentication system utilizing Google sign-in as well as Facebook sign-in. Both Google and Facebook allow only secure connections. So, for my app's authentication system to work I had to set up a TLS/SSL certificate for my server.<br>
 <br>
-The following steps describe how to set up a TLS/SSL certificate for an Apache server running a WSGI app on a Amazon Lightsail Ubuntu 16.4 LTS instance.
+The following steps describe how to set up a TLS/SSL certificate for an Apache server running a WSGI app on a Amazon Lightsail Ubuntu 16.4 LTS instance.<br>
 <br>
 
 ## Configure your firewall
@@ -157,7 +159,7 @@ You can test if this automated renewal process is working on your server, by run
 sudo certbot renew --dry-run
 ```
 If everything is ok, a success message will be printed to the terminal that looks something like this:<br>
-<kbd><img src="readme_images/certbot-renew-dry-run.PNG" width=550></kbd>
+<kbd><img src="readme_images/certbot-renew-dry-run.PNG" width=550></kbd><br>
 <br>
 
 ## Remove certificates
@@ -175,3 +177,11 @@ Should you whish to remove a certificate at some point in the future:
     ```
 * Remove the redirect instructions from your XX.conf file.
 * Activate the new Apache configuration (steps see above).
+
+<br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>

@@ -26,7 +26,7 @@ I __secured my server__ by implementing the following security measures:
 
 A detailed description of all the steps can be found [here](secure_your_server.md).<br>
 
-I __set up a new user__ with sudo permissions so that a Udacity grader will be able to inspect my work. I also disabled password authentication and generated an SSH key pair for the new user, to secure SSH connections to my server.<br>
+Originally this project started out as a student project for the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004), called *Linux server configuration project*. I __set up a new user__ with sudo permissions so that a Udacity grader will be able to inspect my work. I also disabled password authentication and generated an SSH key pair for the new user, to secure SSH connections to my server.<br>
 A detailed description of all the steps I performed to achieve this can be found [here](give_grader_access.md).<br>
 
 I __deployed my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project__ onto my server; a Python 3.7 CRUD application developed with Flask and SQLite.<br>

@@ -1,4 +1,7 @@
 # Deploy your project
+
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
 Please note that the following instructions are suitable, if you want to deploy a **Python 3 Flask** application onto your server. Other kinds of applications (including Python 2 applications) need different prerequisites that are not covered here!<br>
 <br>
 Example: My [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) project.<br>
@@ -351,4 +354,11 @@ Make sure that your .git directory is not publicly accessible via a browser:
     RedirectMatch 404 /\.git
     ```
 
-This solution hides all .git directories and even other Git files like .gitignore and .gitmodules.
+This solution hides all .git directories and even other Git files like .gitignore and .gitmodules.<br>
+<br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>

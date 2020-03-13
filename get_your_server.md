@@ -1,5 +1,7 @@
 # Set up your server
 
+> This document is part of the [*Linux Server Setup*](README.md) project and is to be viewed within this context.
+
 ## Get your server
 Go to https://lightsail.aws.amazon.com and log in.<br>
 Click on *Create Instance*:<br>
@@ -33,7 +35,14 @@ To view the instructions:
 
 * Click on your instance to go to the instance's site.
 * Make sure you are on the *Connect* tab:<br>
-<kbd><img src="readme_images/instance-site-connect.PNG" width=550></kbd>
+    <kbd><img src="readme_images/instance-site-connect.PNG" width=550></kbd>
 * Click that little *(?)* next to *Connect using your own SSH client*.
 * Follow the instructions.
+
 <br>
+
+## Author
+
+**Elisabeth Strunk**<br>
+<img src="readme_images/GitHub-Mark-32px.png" width=22> https://github.com/ElisabethStrunk<br>
+<img src="readme_images/LI-In-Bug.png" width=22> https://www.linkedin.com/in/elisabeth-strunk/<br>
