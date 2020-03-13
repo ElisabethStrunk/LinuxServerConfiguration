@@ -1,13 +1,15 @@
-# Udacity_FullStack_LinuxServerConfiguration
-Linux server configuration project of the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).<br>
-For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, as well as installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app. I also connected a custom domain to my server.<br>
+# Linux Server Setup
+
+I set up a Linux web server to host my hobby projects using [*Amazon Lightsail*](https://aws.amazon.com/free/compute/lightsail/), [*Ubuntu 16.4 LTS*](http://releases.ubuntu.com/16.04/), [*Apache2*](https://httpd.apache.org/), [*Git*](https://git-scm.com/), [*WSGI*](https://wsgi.readthedocs.io/en/latest/) and [*Let's Encrypt*](https://letsencrypt.org/) with [*Certbot*](https://certbot.eff.org/).<br>
+<br>
+For this project I took a baseline installation of a Linux server and prepared it to host one of my web applications. It included securing my server from a number of attack vectors, as well as installing and configuring a database server to serve my [*Item Catalog*](https://github.com/ElisabethStrunk/Udacity_FullStack_ItemCatalog) application as a WSGI app. I also connected a custom domain to my server and set up a TLS/SSL certificate to make secure connections via HTTPS possible.<br>
 <br>
 This README gives an overview over the work I did for this project. It also includes links to detailed descriptions of all steps I did along the way. These descriptions are written in a tutorial-like form, so they can be used as guidelines for myself and the whole GitHub community when setting up a Linux server to serve Python 3.7 applications as WSGI apps.<br>
 A list of third-party resources I used to complete this project can be found at the end of this README in the *Acknowledgements* section.<br>
 <br>
 You are very welcome to visit my server:<br>
 **Profile Site:**       http://elisabethstrunk.me/<br>
-**Item Catalog App:**   http://elisabethstrunk.me/item_catalog/catalog/
+**Item Catalog App:**   http://elisabethstrunk.me/item_catalog/catalog/<br>
 <br>
 
 ## Summary of configurations made
@@ -50,7 +52,7 @@ A detailed description of all the steps I performed to achieve this can be found
 
 ## Summary of software installed 
 In the following a summary of all software I installed (without dependencies) is given.<br>
-<br>
+
 ### Custom-build software:
 
 * Python 3.7.2, incl. SQLite extensions
@@ -108,7 +110,7 @@ In the following a summary of all software I installed (without dependencies) is
 
 ## Acknowledgments
 
-* Huge thanks to [Michael Wales](https://github.com/walesmd) who authored the Udacity course this project is based upon.
+* Originally this project started out as a student project for the [Udacity Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004), called *Linux server configuration project*. Huge thanks to [Michael Wales](https://github.com/walesmd) who authored this Udacity project and to all the Udacity tutors who inspired me to make this an ongoing hobby project of mine.
 * Many thanks to [Daniel Abrão](https://github.com/jungleBadger) who provides [instructions](https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/blob/master/python3+venv+wsgi/README.md) on how to use Apache, Python 3, venv and wsgi together.
 * Many thanks to Kundan Singh who wrote an [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps#step-four-%E2%80%93-configure-and-enable-a-new-virtual-host) on "How To Deploy a Flask Application on an Ubuntu VPS".
 * Many thanks to [*Website for Students*](https://websiteforstudents.com) for providing a [tutorial](https://websiteforstudents.com/installing-the-latest-python-3-7-on-ubuntu-16-04-18-04/) on how to upgrade Python on Ubuntu 16.04.
