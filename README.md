@@ -43,6 +43,9 @@ A detailed description of all the steps I performed, as well as the reasons for 
 
 I __connected a custom domain to my server__ using GoDaddy as registrar for my domain.<br>
 A detailed description of all the steps I performed to achieve this can be found [here](connect_your_domain.md).<br>
+
+I __set up a TLS/SSL certificate__ to make secure connections via HTTPS (and therefore OAuth 2.0 with Google and Facebook sign-in) possible.<br>
+A detailed description of all the steps I performed to achieve this can be found [here](set_up_a_TLS-SSL_certificate.md).<br>
 <br>
 
 ## Summary of software installed 
