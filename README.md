@@ -80,6 +80,7 @@ In the following a summary of all software I installed (without dependencies) is
 * lzma
 * lzma-dev
 * python3-pip
+* python-certbot-apache
 * python-dev
 * python-virtualenv
 * tk8.5-dev
@@ -115,3 +116,5 @@ In the following a summary of all software I installed (without dependencies) is
 * Many thanks to [Gareth Johnson](https://github.com/garethbjohnson) who authored an [article](https://medium.com/@garethbjohnson/serve-python-3-7-with-mod-wsgi-on-ubuntu-16-d9c7ab79e03a) on how to *Serve Python 3.7 with 'mod_wsgi' on Ubuntu 16*.
 * Many thanks to Graham Dumpleton, who authored several user guides on mod_wsgi. For this document, I used his [*Virtual Environments*](https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html) guide on how to use Python virtual environments with mod_wsgi and his [*Quick Configuration Guide*](https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html).
 * Many thanks to [Bennett McElwee](https://github.com/bennettmcelwee), who describes a [method](https://stackoverflow.com/a/17916515/10917711) to make sure that .git directories cannot be publicly accessed via a browser.
+* Many thanks to [Erika Heidi](https://github.com/erikaheidi) for providing a [tutorial](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-16-04) on how to to set up a TLS/SSL certificate from Let’s Encrypt on an Ubuntu 16.04 server running Apache as a web server.
+* Many thanks to all the people participating in [this](https://stackoverflow.com/questions/47803081/certbot-apache-error-name-duplicates-previous-wsgi-daemon-definition) Stack Overflow discussion, which helped me find a way to use Certbot despite its bug concerning WSGI.
