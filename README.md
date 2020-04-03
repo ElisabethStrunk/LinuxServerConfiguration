@@ -50,57 +50,6 @@ I __set up a TLS/SSL certificate__ to make secure connections via HTTPS (and the
 A detailed description of all the steps I performed to achieve this can be found [here](set_up_a_TLS-SSL_certificate.md).<br>
 <br>
 
-## Summary of software installed 
-In the following a summary of all software I installed (without dependencies) is given.<br>
-
-### Custom-build software:
-
-* Python 3.7.2, incl. SQLite extensions
-* mod_wsgi 4.6.5, compiled for the custom Python 3.7.2 build
-
-### Packages from the dpkg packaging system:
-
-* apache2
-* apache2-dev
-* build-essential
-* checkinstall
-* git
-* libapache2-mod-wsgi-py3
-* libbz2-dev
-* libc6-dev
-* libffi-dev
-* libgdbm-dev
-* liblzma-dev
-* libncurses5-dev
-* libnss3-dev
-* libpq-dev
-* libreadline6-dev
-* libreadline-dev
-* libreadline-gplv2-dev
-* libsqlite3-dev
-* libssl-dev
-* lzma
-* lzma-dev
-* python3-pip
-* python-certbot-apache
-* python-dev
-* python-virtualenv
-* tk8.5-dev
-* tk-dev
-* wget
-* zlib1g-dev
-
-### Python packages:
-
-* bleach
-* Flask
-* httplib2
-* oauth2client
-* requests
-* SQLAlchemy
-
-<br>
-
 ## Author
 
 **Elisabeth Strunk**<br>
